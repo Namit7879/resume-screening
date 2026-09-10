@@ -3,7 +3,7 @@ from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 import uvicorn
-
+import os
 # Import NLP helpers
 from utils.nlp_utils import (
     extract_text_from_pdf,
@@ -160,4 +160,4 @@ async def analyze_resumes(
     return results
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("app:app", host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
